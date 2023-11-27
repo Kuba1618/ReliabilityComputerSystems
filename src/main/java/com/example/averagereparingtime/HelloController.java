@@ -2,6 +2,7 @@ package com.example.averagereparingtime;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
@@ -9,6 +10,8 @@ public class HelloController {
 
     @FXML
     private TextField minTxtField;
+    @FXML
+    private Button obliczBtn;
 
     @FXML
     private VBox timeForConcreteTrialVBox;
@@ -30,5 +33,13 @@ public class HelloController {
         timeForConcreteTrialVBox.setMinHeight(numberOfFields * 25.5);
     }
 
-    // Pozostała część kontrolera...
+    @FXML
+    public void count(){
+
+    }
+
+    public void getData(){
+
+    }
+
 }
