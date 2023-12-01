@@ -1,17 +1,18 @@
 package counting;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 public class Data {
     public int numberOfData;
-    public int r = 0; //liczba uszkodzeń r
-    public List<Float> anotherTimesForAllData; //kolejne czasy naprawy
-    public Map<Float, Integer> reparingTimeArray; //
-    public Map<Integer,Float> statisticChiSquareMap01; //dla alpha = 0,1
-    public Map<Integer,Float> statisticChiSquareMap005; //dla alpha = 0,1
-    public Map<Integer,Float> statisticChiSquareMap095; //dla alpha = 0,1
+    public int r = 0; //number of destroys - liczba uszkodzeń
+    public List<Float> anotherTimesForAllData = new LinkedList<>(); //kolejne czasy naprawy
+    public Map<Float, Integer> reparingTimeMap = new HashMap<Float, Integer>(); //tablica chyba 10.12 albo 10.15 z książki
+    public Map<Integer,Float> statisticChiSquareMap01 = new HashMap<Integer,Float>(); //dla alpha = 0,1
+    public Map<Integer,Float> statisticChiSquareMap005 = new HashMap<Integer,Float>(); //dla alpha = 0,1
+    public Map<Integer,Float> statisticChiSquareMap095 = new HashMap<Integer,Float>(); //dla alpha = 0,1
     public float Tn1 = 0; // maxAverageReparingTime - maksymalny dopuszczalny średni czas naprawy
     public float Tn = 0; // requiredReparingTime - wymagany średni czas naprawy
     public float Tns = 0; // sum of reparingTimeArray - łączny czas wszystkich napraw
@@ -22,50 +23,42 @@ public class Data {
     public float beta = 0; // risk of Recipient - ryzyko obdiorcy beta
     public float quotient = 0; // pattern will be shown in the body function
     public boolean isConditionMet = false;
-
-    public Data(int numberOfData, List<Float> anotherTimesForAllData, float maxAverageReparingTime, float requiredReparingTime) {
+    public Data(int numberOfData, List<Float> anotherTimesForAllData, float maxAverageReparingTime, float requiredReparingTime,float alpha, float beta) {
         this.numberOfData = numberOfData;
         this.anotherTimesForAllData = anotherTimesForAllData;
         this.Tn1 = maxAverageReparingTime;
         this.Tn = requiredReparingTime;
-        fillReparingTimeArray();
+        this.alpha = alpha;
+        this.beta = beta;
+        fillReparingTimeMap();
         fillStatisticChiSquareMap01();
         fillStatisticChiSquareMap005();
         fillStatisticChiSquareMap095();
     }
-
     public int getNumberOfData() {
         return numberOfData;
     }
-
     public void setNumberOfData(int numberOfData) {
         this.numberOfData = numberOfData;
     }
-
-    public Map<Float, Integer> getReparingTimeArray() {
-        return reparingTimeArray;
+    public Map<Float, Integer> getReparingTimeMap() {
+        return reparingTimeMap;
     }
-
-    public void setReparingTimeArray(Map<Float, Integer> reparingTimeArray) {
-        this.reparingTimeArray = reparingTimeArray;
+    public void setReparingTimeMap(Map<Float, Integer> reparingTimeMap) {
+        this.reparingTimeMap = reparingTimeMap;
     }
-
     public float getTn1() {
         return Tn1;
     }
-
     public void setTn1(float tn1) {
         Tn1 = tn1;
     }
-
     public float getTn() {
         return Tn;
     }
-
     public void setTn(float Tn) {
         Tn = Tn;
     }
-
     public float getAlpha() {
         return alpha;
     }
@@ -78,23 +71,44 @@ public class Data {
     public void setBeta(float beta) {
         this.beta = beta;
     }
-    public void countData() {
-        sumTimeForAllData();
-    }
     public float getQuotient() {
         return quotient;
     }
     public void setQuotient(float quotient) {
         this.quotient = quotient;
     }
-    public void fillReparingTimeArray() {
-        reparingTimeArray.put(1.5f, 41);
-        reparingTimeArray.put(1.6f, 30);
-        reparingTimeArray.put(1.7f, 24);
-        reparingTimeArray.put(1.8f, 20);
-        reparingTimeArray.put(1.9f, 16);
-        reparingTimeArray.put(2.0f, 14);
-    } //uzupełnienie tablicy czasu naprawy o rozkładzie wykładniczym
+    public float getTng() {
+        return Tng;
+    }
+    public void setTng(float tng) {
+        Tng = tng;
+    }
+    public float getTnd() {
+        return Tnd;
+    }
+    public void setTnd(float tnd) {
+        Tnd = tnd;
+    }
+    public void fillReparingTimeMap() {
+        reparingTimeMap.put(1.5f, 41);
+        reparingTimeMap.put(1.6f, 30);
+        reparingTimeMap.put(1.7f, 24);
+        reparingTimeMap.put(1.8f, 20);
+        reparingTimeMap.put(1.9f, 16);
+        reparingTimeMap.put(2.0f, 14);
+//        reparingTimeMap.put(1.5f, 50);
+//        reparingTimeMap.put(1.6f, 50);
+//        reparingTimeMap.put(1.7f, 48);
+//        reparingTimeMap.put(1.8f, 40);
+//        reparingTimeMap.put(1.9f, 32);
+//        reparingTimeMap.put(2.0f, 28);
+    }//uzupełnienie tablicy czasu naprawy o rozkładzie wykładniczym
+    public void displayMap(Map<Float, Integer> map ){
+
+        for (Map.Entry<Float, Integer> entry : map.entrySet()) {
+            System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
+        }
+    }
     public void fillStatisticChiSquareMap01(){
         statisticChiSquareMap01.put(14,7.79f);
         statisticChiSquareMap01.put(16,9.31f);
@@ -121,28 +135,29 @@ public class Data {
     }
 
     //START COUNTING PART
-    public void counData(){
-        numberOfDestroyed();
+    public void countData(){
+        numberOfDestroys();
         sumTimeForAllData();
         estimatedAverageReparingTime();
         isConditionMet();
         countLimes();
     }
-    public float numberOfDestroyed(){
+    public float numberOfDestroys(){
 
-        if(Tn != 0){
+        if(Tn != 0) {
             quotient = Tn1/Tn;
             quotient *= 10;
             quotient = Math.round(quotient);
             quotient /= 10;
         }
 
-        r = anotherTimesForAllData.indexOf(quotient);
+        r = reparingTimeMap.get(quotient); // na podstawie ilorazu quotient(Tn1/Tn) odczytujemy r (liczbę uszkodzeń)
+        System.out.println("r = " + r);
+
         return r;
-    } //na podstawie ilorazu Tn1/Tn odczytujemy r (liczbę uszkodzeń)
+    }
     public float sumTimeForAllData(){
         float sum = 0;
-        anotherTimesForAllData = new LinkedList<>();
 
         for(float time : anotherTimesForAllData) {
             sum += time;
@@ -151,22 +166,27 @@ public class Data {
         Tns = sum;
 
         return Tns;
-    } //zsumowanie wszystkich czasów
+    } // zsumowanie wszystkich czasów
     public void estimatedAverageReparingTime(){
-        TnE = sumTimeForAllData()/numberOfDestroyed();
+        if(r != 0){
+            TnE = Tns / r;
+        }
     }
-    public void isConditionMet(){
+    public boolean isConditionMet(){ // spełnienie wymagania dla średniego czasu naprawy
 
         float statisticChiSquare = statisticChiSquareMap01.get(r);
+
         float expression = statisticChiSquare * statisticChiSquare / 2 * r;
 
+        System.out.println("Tne = " + TnE + " Tn = " + Tn );
         if(TnE >= (Tn * expression)){
             isConditionMet = false;
-            return;
+            return false;
         }
 
         isConditionMet = true;
-    } //spełnia wymaganie dla średniego czasu naprawy
+        return true;
+    }
     public void countLimes(){
 
         float statisticChiSquare = statisticChiSquareMap005.get(r);
@@ -176,4 +196,17 @@ public class Data {
         Tng = 2 * Tns / (statisticChiSquare2 * statisticChiSquare2);
     }
 
+    @Override
+    public String toString() {
+        return  "\n Liczebność próby = " + numberOfData +
+                "\n Liczba uszkodzeń = " + r +
+                "\n Maks. dopuszczalny czas naprawy  = " + Tn1 +
+                "\n Wymagany czas naprawy = " + Tn +
+                "\n Sumaryczny czas naprawy = " + Tns +
+                "\n Szacowany średni czas naprawy = " + TnE +
+                "\n Tng = " + Tng +
+                "\n Tnd = " + Tnd +
+                "\n Poziom istotności alfa = " + alpha +
+                "\n Ryzyko odbiorcy beta = " + beta;
+    }
 }

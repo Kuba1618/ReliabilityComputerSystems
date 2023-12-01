@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <VBox alignment="CENTER" prefHeight="480.0" prefWidth="640.0" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.averagereparingtime.HelloController">
 
@@ -15,16 +16,15 @@
                                 <children>
                                     <Button fx:id="obliczBtn" layoutX="473.0" layoutY="406.0" mnemonicParsing="false" onAction="#count" prefHeight="30.0" prefWidth="121.0" text="Oblicz" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="473.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="406.0" />
                                     <Label layoutX="59.0" layoutY="48.0" prefHeight="18.0" prefWidth="95.0" text="Liczebność próby:" />
-                                    <Label layoutX="70.0" layoutY="182.0" text="Poziom istotnośi alfa:" />
+                                    <Label layoutX="70.0" layoutY="182.0" text="Poziom istotności alfa:" />
                                     <Label layoutX="14.0" layoutY="255.0" prefHeight="18.0" prefWidth="186.0" text="Maks. dopuszczalny czas naprawy: " />
-                                    <TextField fx:id="minTxtField" layoutX="173.0" layoutY="44.0" prefHeight="26.0" prefWidth="80.0" AnchorPane.topAnchor="44.0" />
-                                    <TextField fx:id="q2TxtField" layoutX="200.0" layoutY="251.0" prefHeight="26.0" prefWidth="80.0" />
-                                    <TextField fx:id="q3TxtField" layoutX="199.0" layoutY="178.0" prefHeight="26.0" prefWidth="80.0" text="0.1" />
-                           <TextField fx:id="q3TxtField1" layoutX="498.0" layoutY="178.0" prefHeight="26.0" prefWidth="80.0" text="0.1" />
+                                    <TextField fx:id="minTxtField" layoutX="173.0" layoutY="44.0" prefHeight="26.0" prefWidth="80.0" text="2" AnchorPane.topAnchor="44.0" />
+                                    <TextField fx:id="maxAverageReparingTimeTxtField" layoutX="200.0" layoutY="251.0" prefHeight="26.0" prefWidth="80.0" text="18" />
+                                    <TextField fx:id="alphaTxtField" layoutX="199.0" layoutY="178.0" prefHeight="26.0" prefWidth="80.0" text="0.1" />
+                           <TextField fx:id="betaTxtField" layoutX="498.0" layoutY="178.0" prefHeight="26.0" prefWidth="80.0" text="0.1" />
                            <Label layoutX="364.0" layoutY="183.0" text="Ryzyko odbiorcy beta:" />
-                                    <Button fx:id="generateForm" layoutX="107.0" layoutY="91.0" mnemonicParsing="false" onAction="#generateForm" prefHeight="26.0" prefWidth="131.0" text="Wygeneruj formularz" />
-                           <Label layoutX="389.0" layoutY="14.0" prefHeight="24.0" prefWidth="182.0" text="Wprowadź kolejne czasy próby:" />
-                                    <!-- ... -->
+                                    <Button fx:id="generateForm" layoutX="107.0" layoutY="91.0" mnemonicParsing="false" onAction="#generateForm" prefHeight="26.0" prefWidth="167.0" text="Wprowadź czasy naprawy" />
+                           <Label layoutX="389.0" layoutY="14.0" prefHeight="24.0" prefWidth="182.0" text="Wprowadź kolejne czasy naprawy:" />
 
                                     <ScrollPane layoutX="389.0" layoutY="44.0" prefHeight="100.0" prefWidth="160.0" vbarPolicy="ALWAYS">
                                         <content>
@@ -32,9 +32,21 @@
                                         </content>
                                     </ScrollPane>
                            <Label layoutX="352.0" layoutY="255.0" prefHeight="18.0" prefWidth="141.0" text="Wymagany czas naprawy: " />
-                           <TextField fx:id="q2TxtField1" layoutX="498.0" layoutY="251.0" prefHeight="26.0" prefWidth="80.0" />
-
-                                    <!-- ... -->
+                           <TextField fx:id="requiredReparingTimeTxtField" layoutX="498.0" layoutY="251.0" prefHeight="26.0" prefWidth="80.0" text="10" />
+                           <Label fx:id="isConditionMetLabel" layoutX="180.0" layoutY="328.0" prefHeight="50.0" prefWidth="280.0">
+                              <font>
+                                 <Font size="14.0" />
+                              </font></Label>
+                           <Label fx:id="Tnd" layoutX="14.0" layoutY="406.0" prefHeight="30.0" prefWidth="120.0">
+                              <font>
+                                 <Font size="13.0" />
+                              </font>
+                           </Label>
+                           <Label fx:id="Tng" layoutX="153.0" layoutY="406.0" prefHeight="30.0" prefWidth="120.0">
+                              <font>
+                                 <Font size="13.0" />
+                              </font></Label>
+                           <Button fx:id="saveToFileBtn" layoutX="472.0" layoutY="366.0" mnemonicParsing="false" onAction="#saveToFile" prefHeight="26.0" prefWidth="152.0" text="Zapisz do pliku" />
 
                                 </children></AnchorPane>
                         </content>

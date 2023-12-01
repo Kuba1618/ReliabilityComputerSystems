@@ -16,6 +16,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>net.raumzeitfalle.fx</groupId>
+            <artifactId>filechooser</artifactId>
+            <version>0.0.11.1</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
             <version>18.0.2</version>
@@ -37,6 +43,11 @@
             <artifactId>junit-jupiter-engine</artifactId>
             <version>${junit.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.dominikcebula.hadoop.ftp</groupId>
+            <artifactId>hdfs-ftp</artifactId>
+            <version>1.1</version>
         </dependency>
     </dependencies>
 
