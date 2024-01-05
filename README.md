@@ -16,4 +16,5 @@
 
 **Literatura**
 
-![image](https://github.com/Kuba1618/ReliabilityComputerSystems/assets/59400834/48dbb8ca-c2ae-468b-aa01-eec1e547ab9b)
+![image](https://github.com/Kuba1618/ReliabilityComputerSystems/assets/59400834/2c17d884-e416-4be5-8af6-13c4616e253c)
+
