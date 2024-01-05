@@ -1,10 +1,19 @@
-![image](https://github.com/Kuba1618/ReliabilityComputerSystems/assets/59400834/a016489c-7f8b-44f8-b318-a90a1d8a9689)
-![image](https://github.com/Kuba1618/ReliabilityComputerSystems/assets/59400834/d853e9b8-2fbf-4893-8df3-da326fbf8f90)
-![image](https://github.com/Kuba1618/ReliabilityComputerSystems/assets/59400834/2257390b-9608-49ea-99e9-6b51ddaf3918)
-![image](https://github.com/Kuba1618/ReliabilityComputerSystems/assets/59400834/3ad38cc9-2ce7-4b40-a9a7-7e108759b442)
-![image](https://github.com/Kuba1618/ReliabilityComputerSystems/assets/59400834/918038f3-c1bb-4ed9-bdd1-148c2f49c862)
-![image](https://github.com/Kuba1618/ReliabilityComputerSystems/assets/59400834/fff24a29-6f3c-4242-92e8-7971197b968b)
-![image](https://github.com/Kuba1618/ReliabilityComputerSystems/assets/59400834/2495ae39-6cf4-4b1e-b824-fa1ae3855907)
+                                              Wstęp teoretyczny
+
+![image](https://github.com/Kuba1618/ReliabilityComputerSystems/assets/59400834/840cc19d-9439-47a3-a30a-2b4793a2aa84)
 
 
+                                              Algorytm działania
 
+![image](https://github.com/Kuba1618/ReliabilityComputerSystems/assets/59400834/9ceec1d2-8a75-4f4f-a2c0-e730786cb3ad)
+
+
+                                              Działanie programu
+
+![image](https://github.com/Kuba1618/ReliabilityComputerSystems/assets/59400834/2a37a210-d9cd-4655-9240-a496ba081157)
+![image](https://github.com/Kuba1618/ReliabilityComputerSystems/assets/59400834/cb7680c9-a081-4b39-b8d0-b84403b821c4)
+
+
+                                              Literatura
+
+![image](https://github.com/Kuba1618/ReliabilityComputerSystems/assets/59400834/48dbb8ca-c2ae-468b-aa01-eec1e547ab9b)
