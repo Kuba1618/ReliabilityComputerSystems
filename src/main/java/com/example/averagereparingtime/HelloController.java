@@ -24,7 +24,7 @@ public class HelloController {
     public Data data;
     public List<Float> concreteTimesList;
     @FXML
-    private TextField minTxtField,maxAverageReparingTimeTxtField,requiredReparingTimeTxtField,alphaTxtField,betaTxtField;
+    private TextField minTxtField,maxAverageReparingTimeTxtField,requiredReparingTimeTxtField,alphaTxtField,betaTxtField,numberOfDataFields;
     @FXML
     private Button obliczBtn,saveToFileBtn;
     @FXML
@@ -34,8 +34,16 @@ public class HelloController {
 
     @FXML
     private void generateForm(ActionEvent event) {
-        numberOfFields = Integer.parseInt(minTxtField.getText());
 
+        float maksAvgReparingTime = Float.parseFloat(maxAverageReparingTimeTxtField.getText());
+        float requiredRepairTime = Float.parseFloat(requiredReparingTimeTxtField.getText());
+        float a = Float.parseFloat(alphaTxtField.getText());
+        float b = Float.parseFloat(betaTxtField.getText());
+        data = new Data(concreteTimesList,maksAvgReparingTime,requiredRepairTime,a,b);
+        data.numberOfDestroys();
+        numberOfFields = data.getR();
+        System.out.println(numberOfFields);
+        numberOfDataFields.setText(numberOfFields + "");
         // Wyczyszczenie istniejących pól tekstowych
         timeForConcreteTrialVBox.getChildren().clear();
 
@@ -53,25 +61,19 @@ public class HelloController {
     public void count(){
 
         try{
+                getDataFromVBox();
+                data.countData(concreteTimesList);
 
-            float maksAvgReparingTime = Float.parseFloat(maxAverageReparingTimeTxtField.getText());
-            float requiredRepairTime = Float.parseFloat(requiredReparingTimeTxtField.getText());
-            float a = Float.parseFloat(alphaTxtField.getText());
-            float b = Float.parseFloat(betaTxtField.getText());
-            getDataFromVBox();
-            data = new Data(numberOfFields,concreteTimesList,maksAvgReparingTime,requiredRepairTime,a,b);
-            data.countData();
+                if(data.isConditionMet()){
+                    isConditionMetLabel.setTextFill(Color.GREEN);
+                    isConditionMetLabel.setText("Wymaganie podstawowe spełnione !");
+                } else if(!data.isConditionMet()){
+                    isConditionMetLabel.setTextFill(Color.RED);
+                    isConditionMetLabel.setText("Wymaganie podstawowe NIE spełnione !");
+                }
 
-            if(data.isConditionMet()){
-                isConditionMetLabel.setTextFill(Color.GREEN);
-                isConditionMetLabel.setText("Wymaganie podstawowe spełnione !");
-            } else if(!data.isConditionMet()){
-                isConditionMetLabel.setTextFill(Color.RED);
-                isConditionMetLabel.setText("wymaganie podstawowe NIE spełnione !");
-            }
-
-            Tnd.setText("Tnd = "  + data.getTnd());
-            Tng.setText("Tng = " + data.getTng());
+                Tnd.setText("Tnd = "  + data.getTnd());
+                Tng.setText("Tng = " + data.getTng());
 
         }catch(Exception exception){
             PauseTransition hitAnimation = new PauseTransition(Duration.seconds(2));
@@ -81,6 +83,7 @@ public class HelloController {
             isConditionMetLabel.setText("Błąd programu !!!");
             hitAnimation.setOnFinished(e -> isConditionMetLabel.setText(""));
         }
+
     }
 
     public void getDataFromVBox(){
@@ -119,5 +122,4 @@ public class HelloController {
         }
 
     }
-
 }
